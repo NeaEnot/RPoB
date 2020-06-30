@@ -41,7 +41,6 @@ namespace VkPoster
                     FromGroup = true,
                     Message = text,
                 });
-
             }
         }
     }

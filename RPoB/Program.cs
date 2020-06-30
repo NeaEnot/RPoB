@@ -11,8 +11,10 @@ namespace RPoB
             string text = "";
 
             DirectoryInfo directory = new DirectoryInfo(ConfigurationManager.AppSettings["pathToLibrary"]);
+
             var files = directory.GetFiles();
-            
+            writeCatalog(files);
+
             Random rnd = new Random();
 
             while (true)
@@ -37,6 +39,17 @@ namespace RPoB
             using (StreamWriter writer = new StreamWriter(ConfigurationManager.AppSettings["pathToOut"]))
             {
                 writer.Write(text);
+            }
+        }
+
+        private static void writeCatalog(FileInfo[] files)
+        {
+            using (StreamWriter writer = new StreamWriter(ConfigurationManager.AppSettings["pathToCatalog"]))
+            {
+                foreach (var file in files)
+                {
+                    writer.WriteLine(file.Name);
+                }
             }
         }
 
