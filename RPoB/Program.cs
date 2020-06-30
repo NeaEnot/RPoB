@@ -13,16 +13,27 @@ namespace RPoB
 
             DirectoryInfo directory = new DirectoryInfo(ConfigurationManager.AppSettings["pathToLibrary"]);
             var files = directory.GetFiles();
-
+            
             Random rnd = new Random();
 
-            var file = files[rnd.Next(0, files.Length)];
+            while (true)
+            {
+                text = "";
 
-            int linesCount = getLinesCount(file);
-            int startLine = rnd.Next(0, linesCount + 1);
-            text = getText(file, startLine);
+                var file = files[rnd.Next(0, files.Length)];
 
-            log(file.Name, startLine);
+                int linesCount = getLinesCount(file);
+                int startLine = rnd.Next(0, linesCount + 1);
+                text = getText(file, startLine);
+
+                if (text.Length >= int.Parse(ConfigurationManager.AppSettings["minLength"]))
+                {
+                    log(file.Name, startLine);
+                    break;
+                }
+
+                log(file.Name, startLine, "Текст слишком короткий: " + text.Length);
+            }
 
             using (StreamWriter writer = new StreamWriter(ConfigurationManager.AppSettings["pathToOut"]))
             {
@@ -76,7 +87,7 @@ namespace RPoB
 
                     text += line + "\n";
 
-                    if (rnd.Next(0, int.Parse(ConfigurationManager.AppSettings["randomSize"])) == 0)
+                    if (rnd.Next(0, int.Parse(ConfigurationManager.AppSettings["randomSize"])) == 0 && text.Length >= int.Parse(ConfigurationManager.AppSettings["minLength"]))
                     {
                         break;
                     }
@@ -86,11 +97,11 @@ namespace RPoB
             return text;
         }
 
-        private static void log(string fileName, int startLine)
+        private static void log(string fileName, int startLine, string message = "Замечаний нет")
         {
             using (StreamWriter writer = new StreamWriter(ConfigurationManager.AppSettings["pathToLog"], true))
             {
-                writer.WriteLine("{0} - {1} ({2})", DateTime.Now, fileName, startLine);
+                writer.WriteLine("{0} - {1} ({2}) - {3}", DateTime.Now, fileName, startLine, message);
             }
         }
     }
