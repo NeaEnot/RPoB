@@ -44,11 +44,24 @@ namespace RPoB
 
         private static void writeCatalog(FileInfo[] files)
         {
+            for (int i = 0; i < files.Length - 1; i++)
+            {
+                for (int j = i + 1; j < files.Length; j++)
+                {
+                    if (string.Compare(files[i].Name, files[j].Name) > 0)
+                    {
+                        FileInfo temp = files[i];
+                        files[i] = files[j];
+                        files[j] = temp;
+                    }
+                }
+            }
+
             using (StreamWriter writer = new StreamWriter(ConfigurationManager.AppSettings["pathToCatalog"]))
             {
-                foreach (var file in files)
+                for (int i = 0; i < files.Length; i++)
                 {
-                    writer.WriteLine(file.Name);
+                    writer.WriteLine(files[i].Name);
                 }
             }
         }
