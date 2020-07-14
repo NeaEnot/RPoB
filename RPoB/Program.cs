@@ -29,7 +29,7 @@ namespace RPoB
 
                 if (text.Length >= int.Parse(ConfigurationManager.AppSettings["minLength"]))
                 {
-                    log(file.Name, startLine);
+                    log(file.Name, startLine + 1);
                     break;
                 }
 
