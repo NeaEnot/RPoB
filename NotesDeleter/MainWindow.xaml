@@ -1,0 +1,20 @@
+﻿<Window x:Class="NotesDeleter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NotesDeleter"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="498" Width="996">
+    <Grid Background="#FF2C2C2C">
+        <ScrollViewer>
+            <TextBlock x:Name="textBlock" Margin="10,10,10,47" Text="" TextWrapping="Wrap" Foreground="Black" Background="White"/>
+        </ScrollViewer>
+        <Button x:Name="buttonDelete" Content="Удалить" HorizontalAlignment="Left" Margin="10,0,0,8" Width="77" Height="25" VerticalAlignment="Bottom" IsEnabled="False" Click="buttonDelete_Click"/>
+        <Button x:Name="buttonRemoveNumber" Content="Вырезать цифры в начале" HorizontalAlignment="Left" Margin="92,0,0,8" Width="160" Height="25" VerticalAlignment="Bottom" IsEnabled="False" Click="buttonRemoveNumber_Click"/>
+        <Button x:Name="buttonReplaceRtoS" Content="() -> []" HorizontalAlignment="Left" Margin="257,0,0,8" Width="77" Height="25" VerticalAlignment="Bottom" IsEnabled="False" Click="buttonReplaceRtoS_Click"/>
+        <Button x:Name="buttonReplaceStoR" Content="[] -> ()" HorizontalAlignment="Left" Margin="339,0,0,8" Width="77" Height="25" VerticalAlignment="Bottom" IsEnabled="False" Click="buttonReplaceStoR_Click"/>
+        <Button x:Name="buttonSave" Content="Сохранить" Margin="0,0,26,8" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="77" Click="buttonSave_Click"/>
+        <Button x:Name="buttonOpen" Content="Открыть" Margin="0,0,108,8" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="77" Click="buttonOpen_Click"/>
+    </Grid>
+</Window>
